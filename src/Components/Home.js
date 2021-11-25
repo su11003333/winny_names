@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Home() {
+function Dashboard() {
   const classes = useStyles();
   const [channels, setChannels] = useState([]);
   const history = useHistory();
@@ -126,4 +126,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Dashboard;

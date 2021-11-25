@@ -1,9 +1,13 @@
 body {
   height: 100vh !important;
   overflow: hidden !important;
-  background-color: #22273b !important;
+  padding:0;
+  margin:0;
+  /* background-color: #22273b !important; */
 }
-
+.App,.root{
+  padding:0;
+}
 /* width */
 ::-webkit-scrollbar {
   width: 9px;
@@ -34,12 +38,12 @@ body {
   color: rgba(173, 173, 173, 0.89) !important;
 }
 
-.MuiOutlinedInput-notchedOutline {
+/* .MuiOutlinedInput-notchedOutline {
   border: 0 !important;
-}
+} */
 
 .MuiInputBase-root {
-  color: rgb(245, 245, 245) !important;
+  color: black !important;
 }
 
 .MuiInputBase-root.Mui-disabled {
@@ -82,4 +86,73 @@ a {
 
 .MuiSnackbarContent-root {
   background-color: rgb(109 52 125) !important;
+}
+
+/* animation */
+.entrance--container{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color:black;
+}
+.entrance--wrapper{
+
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  transform-style: preserve-3d;
+}
+.bubble--wrapper{
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  perspective: 800px;
+}
+.entrance--title__container{
+  position: fixed;
+  left:0;
+  top:0;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  transform-style: preserve-3d;
+  perspective: 2000px;
+
+}
+.entrance--title,.entrance--subtitle{
+  color:white;
+  letter-spacing: 13px;
+
+}
+.entrance--title__wrapper{
+  position: absolute;
+  transform:translate3d(0 ,0 ,-4000px);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.entrance--title{
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+.entrance--subtitle{
+  font-size: 70px;
+  bottom:0;
+}
+/* @-webkit-keyframes move {
+  100% {
+    transform: translate3d(50%, -50%, -400px);
+  }
+} */
+
+@keyframes move {
+  100% {
+    transform: translate3d(60%, 200%, -2000px);
+  }
 }

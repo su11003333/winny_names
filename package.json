@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.3",
     "emoji-mart": "^3.0.1",
     "firebase": "^8.4.1",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-anchorme": "^2.2.0",
     "react-dom": "^17.0.2",

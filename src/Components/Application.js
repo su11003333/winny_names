@@ -20,7 +20,7 @@ import Rooms from "./Rooms";
 import { GoSignOut } from "react-icons/go";
 import { FaUserEdit } from "react-icons/fa";
 import { auth, db } from "../Firebase/Firebase";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import Fade from "@material-ui/core/Fade";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -141,7 +141,7 @@ function Application(props) {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const [alert, setAlert] = useState(false);
   const open = Boolean(anchorEl);
-
+  const history = useHistory();
   useEffect(() => {
     db.collection("users")
       .doc(uid)
@@ -181,6 +181,7 @@ function Application(props) {
       .catch((err) => {
         console.log(err);
       });
+      history.push('/signin')
   };
 
   const drawer = userDetails && (

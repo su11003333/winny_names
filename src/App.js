@@ -4,7 +4,12 @@ import Application from "./Components/Application";
 import Chat from "./Components/Chat";
 import Login from "./Components/SignUp";
 import Home from "./Components/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Signin from "./Components/Signin"
+import Register from "./Components/Register"
+import Entrance from "./Components/Entrance"
+import Qrcode from "./Components/Qrcode"
+import KeyName from "./Components/KeyName"
+import { BrowserRouter as Router, Switch, Route ,Redirect } from "react-router-dom";
 import { auth, db } from "./Firebase/Firebase";
 import "./App.css";
 
@@ -36,7 +41,7 @@ function App() {
             } else {
               const details = {
                 name: user.displayName,
-                displayName: user.displayName.split(" ")[0],
+                // displayName: user.displayName.split(" ")[0],
                 photoURL: user.photoURL,
                 email: user.email,
                 uid: user.uid,
@@ -62,28 +67,41 @@ function App() {
       }
     });
   }, []);
-
+console.log('user');
+console.log(user)
   return (
     <div className="App">
       <Router>
-        {!user ? (
-          <Login />
+        <Switch>
+          <Route path="/entrance" exact component={Entrance}/>
+          <Route path="/qrcode" exact component={Qrcode}/>
+          <Route path="/keyname" exact component={KeyName}/>
+          {!user ? (
+            <>
+            <Route path="/register" exact component={Register} />
+            <Route path="/signin" exact component={Signin} />
+            <Route path="/login" exact component={Login} />
+
+            </>
+
         ) : (
+          <>
           <div className={classes.root}>
             <Application uid={user} />
             <main className={classes.content}>
               <div className={classes.toolbar} style={{ minHeight: "50px" }} />
-              <Switch>
-                <Route path="/" exact>
-                  <Home />
-                </Route>
-                <Route path="/channel/:id">
-                  <Chat />
-                </Route>
-              </Switch>
+              
+                <Route path="/home" component={Home} exact/>
+
+                <Route path="/channel/:id" component={Chat}/>
             </main>
           </div>
+          <Redirect to="/home"/>
+          </>
         )}
+            <Redirect to="/entrance"/>
+        </Switch>
+
       </Router>
     </div>
   );
