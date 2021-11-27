@@ -136,6 +136,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 100px;
 }
 .entrance--title{
   font-size: 25px;
@@ -153,6 +154,6 @@ a {
 
 @keyframes move {
   100% {
-    transform: translate3d(60%, 200%, -2000px);
+    transform: translate3d(60%, 300%, -2000px);
   }
 }

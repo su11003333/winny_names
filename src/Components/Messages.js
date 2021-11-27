@@ -117,7 +117,7 @@ function Messages({ values, msgId }) {
 
   const postImg = values.postImg;
 
-  const channelId = useParams().id;
+  const eventId = useParams().id;
 
   const selectedLike = userLiked
     ? { color: "#8ff879", backgroundColor: "#545454" }
@@ -137,8 +137,8 @@ function Messages({ values, msgId }) {
 
   const heartClick = () => {
     const messageDoc = db
-      .collection("channels")
-      .doc(channelId)
+      .collection("events")
+      .doc(eventId)
       .collection("messages")
       .doc(msgId);
     if (userHeart) {
@@ -198,9 +198,9 @@ function Messages({ values, msgId }) {
 
   const fireClick = () => {
     const messageDoc = db
-      .collection("channels")
-      .doc(channelId)
-      .collection("messages")
+      .collection("events")
+      .doc(eventId)
+      .collection("settings")
       .doc(msgId);
     if (userFire) {
       return db
@@ -259,10 +259,10 @@ function Messages({ values, msgId }) {
 
   const likeClick = () => {
     const messageDoc = db
-      .collection("channels")
-      .doc(channelId)
-      .collection("messages")
-      .doc(msgId);
+      .collection("events")
+      .doc(eventId)
+      .collection("settings")
+      // .doc(msgId);
     if (userLiked) {
       return db
         .runTransaction((transaction) => {
@@ -319,9 +319,9 @@ function Messages({ values, msgId }) {
   };
 
   const deleteMsg = (id) => {
-    db.collection("channels")
-      .doc(channelId)
-      .collection("messages")
+    db.collection("events")
+      .doc(eventId)
+      .collection("settings")
       .doc(id)
       .delete()
       .then((res) => {

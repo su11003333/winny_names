@@ -93,7 +93,7 @@ console.log(user)
               
                 <Route path="/home" component={Home} exact/>
 
-                <Route path="/channel/:id" component={Chat}/>
+                <Route path="/event/:id" component={Chat}/>
             </main>
           </div>
           <Redirect to="/home"/>

@@ -58,24 +58,24 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard() {
   const classes = useStyles();
-  const [channels, setChannels] = useState([]);
+  const [events, setEvents] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    db.collection("channels")
-      .orderBy("channelName", "asc")
+    db.collection("events")
+      .orderBy("eventName", "asc")
       .onSnapshot((snapshot) => {
-        setChannels(
-          snapshot.docs.map((channel) => ({
-            channelName: channel.data().channelName,
-            id: channel.id,
+        setEvents(
+          snapshot.docs.map((event) => ({
+            eventName: event.data().eventName,
+            id: event.id,
           }))
         );
       });
   }, []);
 
-  const goToChannel = (id) => {
-    history.push(`/channel/${id}`);
+  const goToEvent = (id) => {
+    history.push(`/event/${id}`);
   };
 
   return (
@@ -83,7 +83,7 @@ function Dashboard() {
       <Grid container className={classes.root}>
         <Grid item xs={12} style={{ textAlign: "center" }}>
           <Typography component="h1" className={classes.heading}>
-            Welcome to Chatify
+            控制後台
           </Typography>
           <Typography component="h1" className={classes.subHeading}>
             Effortless live chat to hangout with friends!
@@ -92,18 +92,18 @@ function Dashboard() {
       </Grid>
 
       <Grid container className={classes.rootChannel}>
-        {channels.map((channel) => (
+        {events.map((event) => (
           <Grid
             item
             xs={6}
             md={3}
             className={classes.channelDiv}
-            key={channel.id}
+            key={event.id}
           >
             <Card className={classes.channelCard}>
               <CardActionArea
                 style={{ display: "flex" }}
-                onClick={() => goToChannel(channel.id)}
+                onClick={() => goToEvent(event.id)}
               >
                 <CardContent className={classes.channelContent}>
                   <Avatar
@@ -111,10 +111,10 @@ function Dashboard() {
                     className={classes.square}
                     style={{ backgroundColor: "#6a9ec066" }}
                   >
-                    {channel.channelName.substr(0, 1).toUpperCase()}
+                    {event.eventName.substr(0, 1).toUpperCase()}
                   </Avatar>
                   <Typography className={classes.channelText}>
-                    {channel.channelName}
+                    {event.eventName}
                   </Typography>
                 </CardContent>
               </CardActionArea>

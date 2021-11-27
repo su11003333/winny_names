@@ -35,19 +35,19 @@ const useStyles = makeStyles((theme) => ({
 function Rooms() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [channelList, setChannelList] = useState([]);
+  const [eventsList, setEventsList] = useState([]);
   const [showCreateRoom, setShowCreateRoom] = useState(false);
   const history = useHistory();
   const [alert, setAlert] = useState(false);
 
   useEffect(() => {
-    db.collection("channels")
-      .orderBy("channelName", "asc")
+    db.collection("events")
+      .orderBy("eventName", "asc")
       .onSnapshot((snapshot) => {
-        setChannelList(
-          snapshot.docs.map((channel) => ({
-            channelName: channel.data().channelName,
-            id: channel.id,
+        setEventsList(
+          snapshot.docs.map((event) => ({
+            eventName: event.data().eventName,
+            id: event.id,
           }))
         );
       });
@@ -57,8 +57,8 @@ function Rooms() {
     setOpen(!open);
   };
 
-  const goToChannel = (id) => {
-    history.push(`/channel/${id}`);
+  const goToEvent = (id) => {
+    history.push(`/event/${id}`);
   };
 
   const manageCreateRoomModal = () => {
@@ -69,20 +69,20 @@ function Rooms() {
     setAlert(!alert);
   };
 
-  const addChannel = (cName) => {
-    if (cName) {
-      cName = cName.toLowerCase();
-      for (var i = 0; i < channelList.length; i++) {
-        if (cName === channelList[i].channelName) {
+  const addEvent = (eName) => {
+    if (eName) {
+      eName = eName.toLowerCase();
+      for (var i = 0; i < eventsList.length; i++) {
+        if (eName === eventsList[i].eventName) {
           handleAlert();
           return;
         }
       }
 
-      db.collection("channels")
-        .add({ channelName: cName.toLowerCase() })
+      db.collection("events")
+        .add({ eventName: eName.toLowerCase() })
         .then((res) => {
-          console.log("added new channel");
+          console.log("added new Event");
         })
         .then((err) => {
           console.log(err);
@@ -97,7 +97,7 @@ function Rooms() {
         open={alert}
         onClose={handleAlert}
         TransitionComponent={Fade}
-        message="Room Name Already Exits!!"
+        message="Events Name Already Exits!!"
         key={Fade}
         action={
           <IconButton aria-label="close" color="inherit" onClick={handleAlert}>
@@ -107,10 +107,10 @@ function Rooms() {
       />
 
       {showCreateRoom ? (
-        <CreateRoom create={addChannel} manage={manageCreateRoomModal} />
+        <CreateRoom create={addEvent} manage={manageCreateRoomModal} />
       ) : null}
       <ListItem style={{ paddingTop: 0, paddingBottom: 0 }}>
-        <ListItemText primary="Create New Channel" />
+        <ListItemText primary="Create New Event" />
         <IconButton edge="end" aria-label="add" onClick={manageCreateRoomModal}>
           <AddIcon className={classes.primary} />
         </IconButton>
@@ -132,12 +132,12 @@ function Rooms() {
 
         <Collapse in={open} timeout="auto">
           <List component="div" disablePadding>
-            {channelList.map((channel) => (
+            {eventsList.map((event) => (
               <ListItem
-                key={channel.id}
+                key={event.id}
                 button
                 className={classes.nested}
-                onClick={() => goToChannel(channel.id)}
+                onClick={() => goToEvent(event.id)}
               >
                 <ListItemIcon style={{ minWidth: "30px" }}>
                   <BiHash
@@ -146,7 +146,7 @@ function Rooms() {
                   />
                 </ListItemIcon>
                 <ListItemText
-                  primary={channel.channelName}
+                  primary={event.eventName}
                   style={{ color: "#dcddde" }}
                 />
               </ListItem>

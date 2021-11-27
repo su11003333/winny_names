@@ -49,36 +49,40 @@ function FileUpload({ setState, file }) {
 
       if (userData) {
         const displayName = userData.displayName;
-        const imgUrl = userData.photoURL;
+        // const imgUrl = userData.photoURL;
         const uid = userData.uid;
-        const likeCount = 0;
-        const likes = {};
-        const fireCount = 0;
-        const fire = {};
-        const heartCount = 0;
-        const heart = {};
-        const postImg = downloadURL;
+        const showEntrance = false;
+        const showKeyName = false;
+        const showQrcode = false;
+        const entranceTitle = '';
+        const entranceSubTitle = '';
+        const titleColor='#ffffff';
+        const entranceBg = '';
+        const qrcodeBg = '';
+        const  keyNameBg= '';
+        const predictPopulation = 0;
         const obj = {
           text: message,
           timestamp: firebase.firestore.Timestamp.now(),
-          userImg: imgUrl,
-          userName: displayName,
+          showEntrance: showEntrance,
+          showKeyName: showKeyName,
+          showQrcode: showQrcode,
           uid: uid,
-          likeCount: likeCount,
-          likes: likes,
-          fireCount: fireCount,
-          fire: fire,
-          heartCount: heartCount,
-          heart: heart,
-          postImg: postImg,
+          entranceTitle: entranceTitle,
+          entranceSubTitle: entranceSubTitle,
+          titleColor: titleColor,
+          entranceBg: entranceBg,
+          qrcodeBg: qrcodeBg,
+          keyNameBg: keyNameBg,
+          predictPopulation: predictPopulation,
         };
 
-        db.collection("channels")
+        db.collection("events")
           .doc(params.id)
-          .collection("messages")
+          .collection("settings")
           .add(obj)
           .then((res) => {
-            console.log("message sent");
+            console.log("setting success");
           })
           .catch((err) => {
             console.log(err);

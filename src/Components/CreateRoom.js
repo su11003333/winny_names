@@ -6,18 +6,18 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-function CreateRoom({ create, manage }) {
+function CreateEvent({ create, manage }) {
   const [open, setOpen] = useState(true);
-  const [roomName, setRoomName] = useState("");
+  const [eventName, setEventName] = useState("");
 
   const handleClose = () => {
     setOpen(false);
     manage();
   };
-  const handleNewRoom = (e) => {
+  const handleNewEvent = (e) => {
     e.preventDefault();
-    if (roomName) {
-      create(roomName);
+    if (eventName) {
+      create(eventName);
       manage();
     }
   };
@@ -31,21 +31,21 @@ function CreateRoom({ create, manage }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Create A New Channel"}
+          {"Create A New Event"}
         </DialogTitle>
         <DialogContent>
-          <form autoComplete="off" onSubmit={handleNewRoom}>
+          <form autoComplete="off" onSubmit={handleNewEvent}>
             <TextField
               id="outlined-basic"
-              label="Enter Channel Name"
+              label="Enter Event Name"
               fullWidth
               margin="normal"
               variant="outlined"
               required
-              value={roomName}
+              value={eventName}
               style={{ backgroundColor: "rgb(45 45 73)", borderRadius: "5px" }}
               onChange={(e) => {
-                setRoomName(e.target.value);
+                setEventName(e.target.value);
               }}
             />
           </form>
@@ -60,7 +60,7 @@ function CreateRoom({ create, manage }) {
           </Button>
           <Button
             onClick={(e) => {
-              handleNewRoom(e);
+              handleNewEvent(e);
             }}
             type="submit"
             color="primary"
@@ -75,4 +75,4 @@ function CreateRoom({ create, manage }) {
   );
 }
 
-export default CreateRoom;
+export default CreateEvent;
