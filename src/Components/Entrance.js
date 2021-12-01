@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from "../Firebase/Firebase";
+import { useParams } from "react-router-dom";
 import firebase from "firebase/app";
 import NameUnit from "./NameUnit";
 import videoBg from '../Assets/video/bg.mp4';
@@ -18,10 +19,11 @@ const useStyles = makeStyles(theme => ({
 function Entrance() {
     const [allNames, setAllNames] = useState([]);
     const classes = useStyles();
+    const params = useParams();
 
     useEffect(() => {
         db.collection("events")
-            .doc('1')
+            .doc(params.eventId)
             .collection("names")
             .orderBy("created_at", "asc")
             .onSnapshot((snapshot) => {

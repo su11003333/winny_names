@@ -76,10 +76,10 @@ console.log(user)
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/:eventId/entrance" exact component={Entrance}/>
-          <Route path="/:eventId/qrcode" exact component={Qrcode}/>
-          <Route path="/:eventId/keyname" exact component={KeyName}/>
-          <Route path="/:eventId/namemapping/:id" component={Namemapping}/>
+          <Route path="/entrance/:eventId" exact component={Entrance}/>
+          <Route path="/qrcode/:eventId" exact component={Qrcode}/>
+          <Route path="/keyname/:eventId" exact component={KeyName}/>
+          <Route path="/namemapping/:eventId/:id" component={Namemapping}/>
           {!user ? (
             <>
             <Route path="/register" exact component={Register} />

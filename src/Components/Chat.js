@@ -7,7 +7,7 @@ import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Messages from "./Messages";
 import IconButton from "@material-ui/core/IconButton";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { db } from "../Firebase/Firebase";
 import firebase from "firebase/app";
 import ScrollableFeed from "react-scrollable-feed";
@@ -72,6 +72,15 @@ const useStyles = makeStyles((theme) => ({
   inputFile: {
     display: "none",
   },
+  rightButtons: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "end",
+  },
+  rightButton: {
+    marginRight: "5px"
+  }
 }));
 
 const IOSSwitch = withStyles((theme) => ({
@@ -301,6 +310,28 @@ function Chat() {
       <Grid item xs={12} className={classes.roomName}>
         <BiHash className={classes.iconDesign} />
         <h3 className={classes.roomNameText}>{eventName}</h3>
+        <div className={classes.rightButtons}>
+          <Button className={classes.rightButton} variant="contained" color="primary" >
+            <Link style={{ textDecoration: "none" }} to={`/entrance/${params.id}`}>
+              主場頁面
+            </Link>
+          </Button>
+          <Button style={{ textDecoration: "none" }} className={classes.rightButton} variant="contained" color="primary" >
+            <Link to={`/keyname/${params.id}`}>
+              輸入名字頁面
+            </Link>
+          </Button>
+          <Button style={{ textDecoration: "none" }} className={classes.rightButton} variant="contained" color="primary" >
+            <Link to={`/qrcode/${params.id}`}>
+              掃QRcode頁面
+            </Link>
+          </Button>
+          <Button style={{ textDecoration: "none" }} className={classes.rightButton} variant="contained" color="primary" >
+            <Link to={`/namemapping/${params.id}`}>
+              配對名字頁面
+            </Link>
+          </Button>
+        </div>
       </Grid>
       <Grid item xs={12} className={classes.chat}>
         <ScrollableFeed>

@@ -60,7 +60,7 @@ const Form = ({ handleClose }) => {
     };
     if (userName !== '') {
       db.collection("events")
-        .doc('1')
+        .doc(params.eventId)
         .collection("names")
         .add(userName)
         .then((res) => {
@@ -78,12 +78,6 @@ const Form = ({ handleClose }) => {
     sendData()
 
   }
-  const keyDownHandler = (e) => {
-    e.preventDefault();
-    if (e.key === 'Enter') {
-      sendData()
-    };
-  }
 
 
 
@@ -94,8 +88,6 @@ const Form = ({ handleClose }) => {
 
   useEffect(()=>{
     if(params.id){
-      console.log("employee")
-      console.log(nameMapping[params.id])
       setName(nameMapping[params.id])
     }
   },[params])
