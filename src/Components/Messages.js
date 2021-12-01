@@ -262,7 +262,7 @@ function Messages({ values, msgId }) {
       .collection("events")
       .doc(eventId)
       .collection("settings")
-      // .doc(msgId);
+    // .doc(msgId);
     if (userLiked) {
       return db
         .runTransaction((transaction) => {

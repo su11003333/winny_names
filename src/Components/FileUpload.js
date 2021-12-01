@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function FileUpload({ setState, file }) {
+function FileUpload({ setState, file, setAllSettings,allSettings}) {
   const params = useParams();
   const classes = useStyles();
   const [open, setOpen] = useState(true);
@@ -92,13 +92,14 @@ function FileUpload({ setState, file }) {
       setMessage("");
     }
   };
-
+  console.log('file');
+  console.log(file)
   const fileObj = URL.createObjectURL(file);
 
   const handleUpload = (e) => {
     e.preventDefault();
     setProgressBar({ display: "block" });
-    const uploadRef = storage.ref(`images/${file.name}`).put(file);
+    const uploadRef = storage.ref(`images/${file.target}`).put(file);
     uploadRef.on(
       "state_changed",
       (snapshot) => {
@@ -114,7 +115,11 @@ function FileUpload({ setState, file }) {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         uploadRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          sendMsg(downloadURL);
+          // sendMsg(downloadURL);
+          const {target} = file;
+          console.log(downloadURL)
+          setAllSettings({...allSettings,[target]:downloadURL})
+         
         });
         handleClose();
       }

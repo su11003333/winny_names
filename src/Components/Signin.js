@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   padel:{
     width:400,
-    backgroundColor:"white",
+    backgroundColor:"black",
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

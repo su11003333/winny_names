@@ -35,17 +35,23 @@ body {
 }
 
 .MuiInputLabel-outlined {
-  color: rgba(173, 173, 173, 0.89) !important;
+  /* color: rgba(173, 173, 173, 0.89) !important; */
+  color:white !important;
 }
-
-/* .MuiOutlinedInput-notchedOutline {
-  border: 0 !important;
+/* 
+.MuiOutlinedInput-notchedOutline {
+  color: white !important;
 } */
+.MuiOutlinedInput-input{
+  color:white !important; 
+}
 
 .MuiInputBase-root {
   color: black !important;
 }
-
+.MuiInputBase-input {
+  color: white !important;
+}
 .MuiInputBase-root.Mui-disabled {
   color: rgb(255 255 255 / 53%) !important;
   cursor: default !important;

@@ -9,8 +9,11 @@ import Register from "./Components/Register"
 import Entrance from "./Components/Entrance"
 import Qrcode from "./Components/Qrcode"
 import KeyName from "./Components/KeyName"
+import Namemapping from "./Components/Namemapping"
 import { BrowserRouter as Router, Switch, Route ,Redirect } from "react-router-dom";
 import { auth, db } from "./Firebase/Firebase";
+import nameMapping from "./Data/name_mapping";
+
 import "./App.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -73,9 +76,10 @@ console.log(user)
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/entrance" exact component={Entrance}/>
-          <Route path="/qrcode" exact component={Qrcode}/>
-          <Route path="/keyname" exact component={KeyName}/>
+          <Route path="/:eventId/entrance" exact component={Entrance}/>
+          <Route path="/:eventId/qrcode" exact component={Qrcode}/>
+          <Route path="/:eventId/keyname" exact component={KeyName}/>
+          <Route path="/:eventId/namemapping/:id" component={Namemapping}/>
           {!user ? (
             <>
             <Route path="/register" exact component={Register} />

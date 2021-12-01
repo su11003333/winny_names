@@ -20,7 +20,7 @@ import Rooms from "./Rooms";
 import { GoSignOut } from "react-icons/go";
 import { FaUserEdit } from "react-icons/fa";
 import { auth, db } from "../Firebase/Firebase";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import Fade from "@material-ui/core/Fade";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -181,7 +181,7 @@ function Application(props) {
       .catch((err) => {
         console.log(err);
       });
-      history.push('/signin')
+    history.push('/signin')
   };
 
   const drawer = userDetails && (

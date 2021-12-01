@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback ,useEffect} from 'react';
+import { useParams } from "react-router-dom";
 import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -6,6 +7,7 @@ import { auth } from '../Firebase/Firebase';
 import { db } from "../Firebase/Firebase";
 import firebase from "firebase/app";
 import { random } from "lodash";
+import nameMapping from '../Data/name_mapping';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,13 +35,20 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     padding: "20px"
+  },
+  nameWrapper:{
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    flexDirection:"column"
   }
 }));
 
-const Form = () => {
+const Form = ({ handleClose }) => {
   const classes = useStyles();
   // create state variables for each input
   const [name, setName] = useState('');
+  const params = useParams();
   const sendData = useCallback(() => {
     const userName = {
       name: name,
@@ -69,31 +78,43 @@ const Form = () => {
     sendData()
 
   }
+  const keyDownHandler = (e) => {
+    e.preventDefault();
+    if (e.key === 'Enter') {
+      sendData()
+    };
+  }
+
+
+
+
   const cancelClick = () => {
     setName('');
   }
 
+  useEffect(()=>{
+    if(params.id){
+      console.log("employee")
+      console.log(nameMapping[params.id])
+      setName(nameMapping[params.id])
+    }
+  },[params])
+
   return (
     <div className={classes.root} >
       <div className={classes.padel}>
-        <TextField
-          label="Name"
-          variant="outlined"
-          type="name"
-          required
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-        <div>
-          <Button variant="contained" onClick={cancelClick}>
-            取消
-          </Button>
+      <p>您是{name}嗎？</p>
+        <div className={classes.nameWrapper}>
+
           <Button onClick={sendName} variant="contained" color="primary">
-            提交
+            確認送出
+          </Button>
+          <br/>
+          <Button variant="contained" onClick={cancelClick}>
+            手動輸入姓名
           </Button>
         </div>
       </div>
-
     </div>
   );
 };
