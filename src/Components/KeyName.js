@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
+import { useParams } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { auth } from '../Firebase/Firebase';
@@ -40,6 +41,7 @@ const Form = () => {
   const classes = useStyles();
   // create state variables for each input
   const [name, setName] = useState('');
+  const params = useParams();
   const sendData = useCallback(() => {
     const userName = {
       name: name,
@@ -51,7 +53,7 @@ const Form = () => {
     };
     if (userName !== '') {
       db.collection("events")
-        .doc('1')
+      .doc(params.eventId)
         .collection("names")
         .add(userName)
         .then((res) => {
