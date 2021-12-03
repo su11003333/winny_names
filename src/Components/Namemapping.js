@@ -52,8 +52,8 @@ const Form = ({ handleClose }) => {
   const sendData = useCallback(() => {
     const userName = {
       name: name,
-      number1: random(1000, -1000),
-      number2: random(1000, -1000),
+      number1: random(2000, -2000),
+      number2: random(2000, -2000),
       number3: random(500, 1),
       number4: random(360),
       created_at: firebase.firestore.Timestamp.now(),

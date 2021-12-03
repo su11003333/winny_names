@@ -84,8 +84,8 @@ console.log(user)
             <>
             <Route path="/register" exact component={Register} />
             <Route path="/signin" exact component={Signin} />
-            <Route path="/login" exact component={Login} />
-
+            {/* <Route path="/login" exact component={Login} /> */}
+            <Redirect to="/signin"/>
             </>
 
         ) : (
@@ -103,7 +103,7 @@ console.log(user)
           <Redirect to="/home"/>
           </>
         )}
-            <Redirect to="/entrance"/>
+            <Redirect to="/entrance/:eventId"/>
         </Switch>
 
       </Router>
